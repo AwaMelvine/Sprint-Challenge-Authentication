@@ -26,6 +26,9 @@ function createToken(user) {
 async function register(req, res) {
   try {
     const user = req.body;
+    if (!user || !user.username || !user.password) {
+      return res.status(400).json({ error: "Please provide all user data" });
+    }
 
     user.password = bcrypt.hashSync(user.password, 12);
     const prevUser = await User.findByUsername(user.username);
