@@ -3,6 +3,7 @@ const db = require('../database/dbConfig');
 const request = require('supertest');
 const server = require('../api/server');
 
+
 beforeEach(async () => {
     await db('users').truncate();
 });
@@ -10,7 +11,7 @@ beforeEach(async () => {
 describe('Auth Routes', () => {
     describe('[POST]: /api/register', () => {
 
-        it('[POST] / registers new post!', () => {
+        it('[POST] / registers new user!', () => {
             return request(server)
                 .post('/api/register')
                 .send({ username: 'Awa', password: '1234' })
@@ -50,6 +51,30 @@ describe('Auth Routes', () => {
                     expect(res.body.error).toEqual("User already exists");
                 })
         });
+    });
+});
+
+describe('Jokes Route', () => {
+    it('[GET] /api/jokes new user!', () => {
+
+        return request(server)
+            .post('/api/register')
+            .send({ username: 'Awa', password: '1234' })
+            .then(res => {
+                return request(server)
+                    .post('/api/login')
+                    .send({ username: 'Awa', password: '1234' })
+                    .then(res => {
+                        const token = res.body.data;
+                        return request(server)
+                            .get('/api/jokes')
+                            .set({ 'authorization': token, Accept: 'application/json' })
+                            .then(res => {
+                                expect(res.body).toBeInstanceOf(Array);
+                            });
+                    });
+            });
+
     });
 
 });
