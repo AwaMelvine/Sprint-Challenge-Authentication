@@ -29,9 +29,22 @@ Implement an User Authentication System in order to access the jokes from the Jo
 Demonstrate your understanding of this week's concepts by answering the following free-form questions. Edit this document to include your answers after each question. Make sure to leave a blank line above and below your answer so it is clear and easy to read by your project manager.
 
 1. What is the purpose of using _sessions_?
+
+Restful apis are generally stateless meaning the api doesn't have a way of differentiating one request from another. Every request hitting the api must therefore be authenticated individually. Sessions come in to enable the server manage the authentication so that the client would not have to authenticate every request individually.
+
 1. What does bcrypt do to help us store passwords in a secure manner.
+
+`bcrypt` helps us hash our passwords before storing them in a database for security purposes. 
+
 1. What does bcrypt do to slow down attackers?
+
+`bcrypt` uses a salt to hash passwords requiring a brute force attacker to create a rainbow table for each user record. Also, the `bcrypt` algorithm is made to be a bit slow and so this would slow down attackers using brute force.
+
 1. What are the three parts of the JSON Web Token?
+
+- Header
+- Payload
+- Signature
 
 ## Project Set Up
 
