@@ -18,8 +18,13 @@ class Register extends Component {
 
     submit = async e => {
         e.preventDefault();
-        const { data } = await axios.post(`${apiUrl}/register`, this.state);
-        this.props.history.push('/');
+        try {
+            await axios.post(`${apiUrl}/register`, this.state);
+            this.props.history.push('/');
+        } catch (error) {
+            alert('Failed to register');
+        }
+
     }
 
     render() {

@@ -12,9 +12,14 @@ class Jokes extends Component {
         }
     }
     async componentDidMount() {
-        const token = await localStorage.getItem('token');
-        const { data } = await axios.get(`${apiUrl}/jokes`, { headers: { authorization: token } });
-        this.setState({ jokes: data });
+        try {
+            const token = await localStorage.getItem('token');
+            const { data } = await axios.get(`${apiUrl}/jokes`, { headers: { authorization: token } });
+            this.setState({ jokes: data });
+        } catch (error) {
+            this.props.history.push('/login');
+        }
+
     }
     render() {
         return (
