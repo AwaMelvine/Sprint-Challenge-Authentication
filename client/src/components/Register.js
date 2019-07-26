@@ -19,7 +19,7 @@ class Register extends Component {
     submit = async e => {
         e.preventDefault();
         const { data } = await axios.post(`${apiUrl}/register`, this.state);
-        return <Redirect to='/' />;
+        this.props.history.push('/');
     }
 
     render() {

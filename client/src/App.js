@@ -31,9 +31,9 @@ function App() {
         <NavLink to='/login'>Login</NavLink>
         <NavLink to='/register'>Register</NavLink>
       </StyledNav>
-      <Route exact path='/' render={() => <Jokes />} />
-      <Route path='/register' render={() => <Register />} />
-      <Route path='/login' render={() => <Login />} />
+      <Route exact path='/' render={props => <Jokes  {...props} />} />
+      <Route path='/register' render={props => <Register {...props} />} />
+      <Route path='/login' render={props => <Login {...props} />} />
     </div>
   );
 }
