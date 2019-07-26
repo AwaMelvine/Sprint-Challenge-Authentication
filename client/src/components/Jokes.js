@@ -13,9 +13,7 @@ class Jokes extends Component {
     }
     async componentDidMount() {
         const token = await localStorage.getItem('token');
-        console.log(token);
         const { data } = await axios.get(`${apiUrl}/jokes`, { headers: { authorization: token } });
-        console.log(data)
         this.setState({ jokes: data });
     }
     render() {

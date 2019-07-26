@@ -18,9 +18,13 @@ class Login extends Component {
 
     submit = async e => {
         e.preventDefault();
-        const { data } = await axios.post(`${apiUrl}/login`, this.state);
-        await localStorage.setItem('token', data.data);
-        this.props.history.push('/');
+        try {
+            const { data } = await axios.post(`${apiUrl}/login`, this.state);
+            await localStorage.setItem('token', data.data);
+            this.props.history.push('/');
+        } catch (error) {
+            alert('Invalid credentials');
+        }
     }
 
     render() {
